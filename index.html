@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Passkey demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script defer src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script defer src="/base64url-arraybuffer.js" crossorigin="anonymous"></script>
+    <script defer src="/root.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Passkey experiment</h1>
+      <div class="row">
+        <!-- left: login -->
+        <div class="col-6">
+          <h2>Login</h2>
+          <form id="login-form" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="login-username" class="form-label">Username</label>
+              <input type="text" class="form-control" name="login-username" id="login-username" aria-describedby="login-username-help" autocomplete="username webauthn" autofocus required>
+              <div id="login-username-help" class="form-text">Enter your username</div>
+            </div>
+            <div class="mb-3">
+              <label for="login-password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="login-password" aria-describedby="login-username-help" autocomplete="current-password">
+              <div id="login-password-help" class="form-text">Enter your password</div>
+            </div>
+          <button id="login" type="submit" class="btn btn-primary">Login</button>
+          </form>
+          <div id="login-result"></div>
+        </div>
+        <!-- right: register -->
+        <div class="col-6">
+          <h2>Register</h2>
+          <form id="register-form" class="needs-validation" novalidate>
+            <div class="mb-3">
+              <label for="register-username" class="form-label">Username</label>
+              <input type="text" class="form-control" name="register-username" id="register-username" aria-describedby="register-username-help" autocomplete="username" required>
+              <div id="register-username-help" class="form-text">Pick a username</div>
+              <div id="register-username-feedback" class="invalid-feedback">A username is required</div>
+            </div>
+            <div class="mb-3">
+              <label for="register-displayname" class="form-label">Full name</label>
+              <input type="text" class="form-control" name="register-displayname" id="register-displayname" aria-describedby="register-displayname-help" autocomplete="name" required>
+              <div id="register-displayname-help" class="form-text">Please enter your name</div>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="register-use-passkey" value="passkey" id="register-use-passkey" disabled>
+              <label class="form-check-label" for="register-use-passkey">Use Passkey</label>
+            </div>
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="radio" name="register-use-passkey" value="password" id="register-use-password" checked aria-checked="true">
+              <label class="form-check-label" for="register-use-passkey">Use Password</label>
+            </div>
+            <div id="register-with-passkey-container">
+              <div>
+                <button id="register-with-passkey" type="submit" class="btn btn-primary">Register</button>
+              </div>
+            </div>
+            <div id="register-with-password-container" class="d-none">
+              <div class="mb-3">
+                <label for="register-password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="register-password" autocomplete="new-password">
+              </div>
+              <div class="mb-3">
+                <label for="register-confirm-password" class="form-label">Confirm password</label>
+                <input type="password" class="form-control" id="register-confirm-password" autocomplete="new-password">
+              </div>
+              <div>
+                <button id="register-with-password" type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+          <div id="registration-result"></div>
+          <div id="debug"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
